@@ -35,6 +35,9 @@ class AuthService {
       } else if (e.code == 'email-already-in-use') {
         message = 'An account already exists with that email.';
       }
+      else{
+         message = e.message ?? 'Failed';
+      }
        Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_LONG,
@@ -76,6 +79,9 @@ class AuthService {
         message = 'No user found for that email.';
       } else if (e.code == 'invalid-credential') {
         message = 'Wrong password provided for that user.';
+      }
+       else{
+         message = e.message ?? 'Failed';
       }
        Fluttertoast.showToast(
         msg: message,
