@@ -13,7 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast: ^8.2.5
-  google_fonts: 6.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mental_health_support/pages/login/login.dart';
 import 'package:mental_health_support/services/auth_service.dart';
 
 class Signup extends StatelessWidget {
   Signup({super.key});
-
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -26,20 +26,23 @@ class Signup extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               children: [
-                Center(
+                const Center(
                   child: Text(
                     'Register Account',
-                    style: GoogleFonts.raleway(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32)),
                   ),
                 ),
                 const SizedBox(
-                  height: 80,
+                  height: 120,
                 ),
                 _emailAddress(),
+                const SizedBox(
+                  height: 20,
+                ),
+                _firstName(),
+                const SizedBox(
+                  height: 20,
+                ),
+                _lastName(),
                 const SizedBox(
                   height: 20,
                 ),
@@ -59,13 +62,8 @@ class Signup extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Email Address',
-          style: GoogleFonts.raleway(
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16)),
         ),
         const SizedBox(
           height: 16,
@@ -87,19 +85,70 @@ class Signup extends StatelessWidget {
       ],
     );
   }
+   Widget _firstName() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'First Name',
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        TextField(
+          controller: _firstNameController,
+          decoration: InputDecoration(
+              filled: true,
+              hintText: 'First Name',
+              hintStyle: const TextStyle(
+                  color: Color(0xff6A6A6A),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14),
+              fillColor: const Color(0xffF7F7F9),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(14))),
+        )
+      ],
+    );
+  }
+   Widget _lastName() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Last Name',
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        TextField(
+          controller: _lastNameController,
+          decoration: InputDecoration(
+              filled: true,
+              hintText: 'Last Name',
+              hintStyle: const TextStyle(
+                  color: Color(0xff6A6A6A),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14),
+              fillColor: const Color(0xffF7F7F9),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(14))),
+        )
+      ],
+    );
+  }
 
   Widget _password() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Password',
-          style: GoogleFonts.raleway(
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16)),
         ),
         const SizedBox(
           height: 16,
@@ -135,6 +184,9 @@ class Signup extends StatelessWidget {
       ),
       onPressed: () async {
         await AuthService().signup(
+            firstName: _firstNameController.text,
+            lastName: _lastNameController.text,
+            role: "patient",
             email: _emailController.text,
             password: _passwordController.text,
             context: context);

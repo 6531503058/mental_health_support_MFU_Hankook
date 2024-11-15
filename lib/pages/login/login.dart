@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:mental_health_support/pages/signup/signup.dart';
 import 'package:mental_health_support/services/auth_service.dart';
 
@@ -43,11 +43,6 @@ class Login extends StatelessWidget {
               Center(
                 child: Text(
                   'Hello Again',
-                  style: GoogleFonts.raleway(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32)),
                 ),
               ),
               const SizedBox(
@@ -74,13 +69,8 @@ class Login extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Email Address',
-          style: GoogleFonts.raleway(
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16)),
         ),
         const SizedBox(
           height: 16,
@@ -108,13 +98,9 @@ class Login extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Password',
-          style: GoogleFonts.raleway(
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16)),
+
         ),
         const SizedBox(
           height: 16,
