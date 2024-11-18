@@ -1,36 +1,66 @@
 import 'package:flutter/material.dart';
 
-
-
 class SplashHome extends StatelessWidget {
   const SplashHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(child:Text("Menu")) ,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 202, 244, 255), // #CAF4FF40
+            Color.fromARGB(255, 230, 223, 223), // #E6DFDF40
+          ],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
       ),
-      backgroundColor: Colors.white,
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                  'Loading...',
+      child: Scaffold(
+        appBar: AppBar(
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 202, 244, 255),
+                      Color.fromARGB(255, 210, 238, 243),
+                    ],
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                  ),
                 ),
-                SizedBox(height: 10,),
-               
-                 SizedBox(height: 30,),
-                
-            ],
+              ),
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios_rounded),
+              ),
+              title: const Text('Appoinment'),
+              centerTitle: true,
+            ),
+        body: const SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Loading...',
+                    ),
+                    Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
- 
 }

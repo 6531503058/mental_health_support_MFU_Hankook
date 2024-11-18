@@ -33,8 +33,10 @@ class MyApp extends StatelessWidget {
           }
           if (snapshot.hasData) {
             return const Home();
+           
           }
           return Login();
+          
         },
       ),
     );

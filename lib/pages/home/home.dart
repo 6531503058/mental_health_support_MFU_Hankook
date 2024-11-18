@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mental_health_support/pages/appointment/appointment.dart';
 import 'package:mental_health_support/services/auth_service.dart';
 
 class Home extends StatelessWidget {
@@ -25,7 +26,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color.fromARGB(255, 202, 244, 255), // #CAF4FF40
@@ -58,7 +59,7 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // CircleAvatar for profile picture
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 95, // Adjust the size of the circle
                   backgroundImage: NetworkImage(
                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIRUMhOrPk4hJXZmN6UuDwutU_lW89PGqv7BHa5kkDUXKCPk1HeSGO5iHOt7KR9ly0bIs&usqp=CAU'), // For internet image
@@ -147,7 +148,12 @@ class Home extends StatelessWidget {
         child: InkWell(
           onTap: () {
             // Handle the tap action, navigate to the respective page
-            print('Tapped on $title');
+            switch(title){case "Appointment":
+            Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Appointment()));
+            }
+             
             // Example: Navigator.pushNamed(context, '/${title.toLowerCase()}');
           },
           child: Column(
