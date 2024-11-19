@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_support/pages/login/login.dart';
 import 'package:mental_health_support/services/auth_service.dart';
 
-class Signup extends StatelessWidget {
-  Signup({super.key});
+class SignupTherapist extends StatelessWidget {
+  SignupTherapist({super.key});
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -28,7 +28,7 @@ class Signup extends StatelessWidget {
               children: [
                 const Center(
                   child: Text(
-                    'Register Account as Patient',
+                    'Register Account as Therapist',
                   ),
                 ),
                 const SizedBox(
@@ -186,7 +186,7 @@ class Signup extends StatelessWidget {
         await AuthService().signup(
             firstName: _firstNameController.text,
             lastName: _lastNameController.text,
-            role: "patient",
+            role: "therapist",
             email: _emailController.text,
             password: _passwordController.text,
             context: context);

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_support/pages/appointment/appointment.dart';
+import 'package:mental_health_support/pages/appointmentTherapist/appointmentTherapist.dart';
 import 'package:mental_health_support/services/auth_service.dart';
 
 class Home extends StatelessWidget {
@@ -37,8 +38,10 @@ class Home extends StatelessWidget {
         ),
       ),
       child: Scaffold(
+        
         appBar: AppBar(
-          title: const Center(child: Text("Menu")),
+          automaticallyImplyLeading: false,
+          title: const Center(child: Text(" Menu",textAlign: TextAlign.center,)),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -62,7 +65,7 @@ class Home extends StatelessWidget {
                 const CircleAvatar(
                   radius: 95, // Adjust the size of the circle
                   backgroundImage: NetworkImage(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIRUMhOrPk4hJXZmN6UuDwutU_lW89PGqv7BHa5kkDUXKCPk1HeSGO5iHOt7KR9ly0bIs&usqp=CAU'), // For internet image
+                      'https://i.pinimg.com/736x/18/b5/b5/18b5b599bb873285bd4def283c0d3c09.jpg'), // For internet image
                   // Or use an asset image instead:
                   // backgroundImage: AssetImage(profilePictureAsset), // For asset image
                 ),
@@ -81,10 +84,10 @@ class Home extends StatelessWidget {
                     // Display user's name and role
                     final firstName = snapshot.data?['firstName'] ?? 'Unknown';
                     final role = snapshot.data?['role'] ?? 'Unknown role';
-                    return Text("Hello👋, $firstName ($role)");
-                  },
-                ),
-                const SizedBox(
+                    return Column(
+                      children: [
+                        Text("Hello👋, $firstName ($role)"),
+                       const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -100,7 +103,7 @@ class Home extends StatelessWidget {
                       children: [
                         _buildMenuItem(Icons.article, "Feeds", context),
                         _buildMenuItem(
-                            Icons.calendar_today, "Appointment", context),
+                            Icons.calendar_today, role=='patient'? "Appointment":"Appointment ", context),
                       ],
                     ),
                     Row(
@@ -121,6 +124,12 @@ class Home extends StatelessWidget {
                     )
                   ],
                 ),
+                      
+                      ],
+                    );
+                  },
+                ),
+               
                 Expanded(
                   child: Container(),
                 ),
@@ -152,6 +161,11 @@ class Home extends StatelessWidget {
             Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Appointment()));
+                      break;
+                      case"Appointment ":
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AppointmentTherapist()));
             }
              
             // Example: Navigator.pushNamed(context, '/${title.toLowerCase()}');
@@ -173,7 +187,7 @@ class Home extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(title,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                     )),
               ),
             ],

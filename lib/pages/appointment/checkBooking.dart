@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mental_health_support/pages/appointment/meetRoom.dart';
 import 'package:mental_health_support/pages/home/home.dart';
 import 'package:mental_health_support/pages/home/splash.dart';
 
@@ -212,13 +213,12 @@ class CheckBooking extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        child: Text("Cancle booking"),
                         onPressed: () {
                           showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                    title: Text("Before you Cancle"),
-                                    content: Text(
+                                    title: const Text("Before you Cancle"),
+                                    content: const Text(
                                         'The therapist will refund you if you choose to cancel this booking.'),
                                     actions: [
                                       TextButton(
@@ -250,16 +250,16 @@ class CheckBooking extends StatelessWidget {
                                                     "Failed to add meetTime: $error");
                                               }),
                                           child: Container(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.all(
                                                     Radius.circular(5),
                                                   ),
                                                   color: Color.fromARGB(
                                                       255, 190, 52, 52)),
-                                              child: Text(
+                                              child: const Text(
                                                 'Cancle This booking',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -268,9 +268,9 @@ class CheckBooking extends StatelessWidget {
                                           onPressed: () =>
                                               Navigator.pop(context),
                                           child: Container(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5, right: 5),
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 borderRadius: BorderRadius.all(
                                                   Radius.circular(5),
                                                 ),
@@ -286,36 +286,49 @@ class CheckBooking extends StatelessWidget {
                                   ));
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Color.fromARGB(184, 230, 4, 4), // Button color
+                          backgroundColor: const Color.fromARGB(
+                              184, 230, 4, 4), // Button color
                           foregroundColor: const Color.fromARGB(
                               255, 255, 255, 255), // Text color
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
+                        child: Text("Cancle booking"),
                       ),
+                      Container(width: 20,),
                       Column(
+                        
                         children: [
-                          Container(
-                            height: 20,
-                          ),
+                          Container(height: 20,),
                           ElevatedButton(
-                            child: Text('Meet'),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (bookingData['isLive'] == true) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MeetRoom()),
+                                );
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(
-                                  184, 101, 158, 157), // Button color
-                              foregroundColor: const Color.fromARGB(
-                                  255, 255, 255, 255), // Text color
+                              backgroundColor: bookingData['isLive'] == true
+                                  ? Colors.green
+                                  : const Color.fromARGB(
+                                      184, 101, 158, 157), // Conditional color
+                              foregroundColor:
+                                  Colors.white, // Common text color
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
+                            child: const Text('Meet'),
                           ),
-                          Text("wait for therapist to start")
+                          Text(bookingData['isLive'] == true
+                                  ? 'Therapist is waiting.'
+                                  : 'Waiting for therapist to start.',)
                         ],
-                      ),
+                      )
                     ],
                   )
                 ],

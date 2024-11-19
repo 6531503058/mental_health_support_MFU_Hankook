@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mental_health_support/pages/appointment/appointment.dart';
-import 'package:mental_health_support/pages/appointment/checkBooking.dart';
+import 'package:mental_health_support/pages/appointmentTherapist/AppointmentTherapist.dart';
+import 'package:mental_health_support/pages/appointmentTherapist/confirmBookingTherapist.dart';
 import 'package:mental_health_support/pages/home/home.dart';
 import 'package:mental_health_support/pages/home/splash.dart';
 
-class myAppointment extends StatelessWidget {
-  const myAppointment({super.key});
+class ManageBooking extends StatelessWidget {
+  const ManageBooking({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,7 @@ class myAppointment extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('booking')
-          .where('uid', isEqualTo: currentUid) // Filter by UID
-          .where('isCanceled',
-              isNotEqualTo: true) // Filter where canceled is NOT true
+          .where('therapistfrontsId', isEqualTo: currentUid) // Filter by UID
           .snapshots(),
       builder: (ctx, bookingSnapshots) {
         if (bookingSnapshots.connectionState == ConnectionState.waiting) {
@@ -68,7 +66,7 @@ class myAppointment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                       
-                        Text("No therapist found."),
+                        Text("No Booking found."),
                       ],
                     ),
                   ],
@@ -172,12 +170,12 @@ class myAppointment extends StatelessWidget {
                   Container(
                     width: 160,
                     child: ElevatedButton(
-                      child: Text("suggestion".toLowerCase()),
+                      child: Text("my page detail".toLowerCase()),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Appointment()));
+                                builder: (context) =>  AppointmentTherapist()));
                       },
                       style: ElevatedButton.styleFrom(
                          backgroundColor: Colors.grey[300], // Button color
@@ -226,7 +224,7 @@ class myAppointment extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CheckBooking(
+                              builder: (context) => ConfirmBookingTherapist(
                                     bookingId: loadBooking[index].id,
                                   )));
                     },

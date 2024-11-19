@@ -253,6 +253,7 @@ class ConfirmBooking extends StatelessWidget {
                                     await FirebaseFirestore.instance
                                         .collection("booking")
                                         .add({
+                                          'isLive': false,
                                       'hospital':
                                           therapistFrontSnapshot?['hospital'] ??
                                               "not found",
